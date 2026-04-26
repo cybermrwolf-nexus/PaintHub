@@ -678,7 +678,7 @@ function applySettingsToRates() {
 
 function gw(n) {
   wStep = n;
-  for(let i=0;i<4;i++) { const p=$(` + '`wp-${i}`' + `); if(p) p.style.display = i===n?'block':'none'; }
+  for(let i=0;i<4;i++) { const p=document.getElementById('wp-'+i); if(p) p.style.display = i===n?'block':'none'; }
   document.querySelectorAll('.ws').forEach((s,i)=>{
     s.classList.toggle('active',i===n);
     s.classList.toggle('done',i<n);
