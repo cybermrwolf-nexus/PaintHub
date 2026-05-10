@@ -1,48 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PaintScope Pro | Commercial Estimator</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-<style>
-/* CSS VARIABLES & SYSTEM RESET */
-:root {
-  --navy: #12193A; --orange: #F26522; --bg: #F7F8FC; --surface: #FFFFFF;
-  --border: #E8EAF0; --text: #12193A; --muted: #6B7280; --green: #22C55E;
-}
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); display: flex; min-height: 100vh; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PaintScope Pro | Business Manager</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #12193A; --navy2: #1C2547; --orange: #F26522; --bg: #F7F8FC; 
+            --surface: #FFFFFF; --border: #E8EAF0; --text: #12193A; --muted: #6B7280;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); display: flex; min-height: 100vh; }
 
-/* SIDEBAR NAVIGATION */
-.sidebar { width: 240px; background: var(--navy); color: white; position: fixed; height: 100vh; display: flex; flex-direction: column; }
-.sidebar-logo { padding: 30px 20px; font-weight: 700; font-size: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); }
-.sidebar-logo span { color: var(--orange); }
-.nav-links { padding: 20px 10px; flex-grow: 1; }
-.nav-item { padding: 12px 15px; border-radius: 8px; cursor: pointer; transition: 0.2s; margin-bottom: 5px; font-size: 14px; opacity: 0.7; }
-.nav-item:hover, .nav-item.active { background: rgba(255,255,255,0.1); opacity: 1; }
+        /* SIDEBAR */
+        .sidebar { width: 240px; background: var(--navy); color: white; position: fixed; height: 100vh; display: flex; flex-direction: column; z-index: 100; }
+        .sidebar-logo { padding: 30px 20px; font-weight: 700; font-size: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .sidebar-logo span { color: var(--orange); }
+        .nav-links { padding: 20px 10px; flex-grow: 1; }
+        .nav-item { padding: 12px 15px; border-radius: 8px; cursor: pointer; transition: 0.2s; margin-bottom: 5px; font-size: 14px; opacity: 0.7; display: flex; align-items: center; gap: 10px; }
+        .nav-item:hover, .nav-item.active { background: rgba(255,255,255,0.1); opacity: 1; }
 
-/* MAIN CONTENT */
-.main { margin-left: 240px; flex-grow: 1; }
-.topbar { background: var(--surface); height: 70px; display: flex; align-items: center; justify-content: space-between; padding: 0 30px; border-bottom: 1px solid var(--border); sticky; top: 0; }
-.content { padding: 30px; max-width: 1000px; margin: auto; }
+        /* MAIN CONTENT */
+        .main { margin-left: 240px; flex-grow: 1; width: calc(100% - 240px); }
+        .topbar { background: var(--surface); height: 70px; display: flex; align-items: center; justify-content: space-between; padding: 0 30px; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 50; }
+        .content { padding: 30px; max-width: 1100px; margin: auto; }
 
-/* UI COMPONENTS */
-.btn-primary { background: var(--orange); color: white; border: none; padding: 10px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px; }
-.card { background: var(--surface); border-radius: 12px; border: 1px solid var(--border); padding: 20px; margin-bottom: 20px; }
-.grid-config { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 15px; }
-.field { display: flex; flex-direction: column; gap: 5px; }
-.field label { font-size: 12px; color: var(--muted); font-weight: 600; text-transform: uppercase; }
-.field input, .field select { padding: 10px; border-radius: 6px; border: 1px solid var(--border); background: #fafafa; }
-.room-row { background: #fdfdfd; border: 1px dashed var(--border); padding: 15px; border-radius: 8px; margin-bottom: 15px; position: relative; }
-.page { display: none; }
-.page.active { display: block; }
+        /* UI COMPONENTS */
+        .btn-primary { background: var(--orange); color: white; border: none; padding: 10px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px; }
+        .btn-outline { background: transparent; border: 1px solid var(--border); padding: 8px 15px; border-radius: 8px; cursor: pointer; }
+        .card { background: var(--surface); border-radius: 12px; border: 1px solid var(--border); padding: 20px; margin-bottom: 20px; }
+        
+        /* TABLES */
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th { text-align: left; padding: 12px; border-bottom: 2px solid var(--bg); color: var(--muted); font-size: 13px; }
+        td { padding: 12px; border-bottom: 1px solid var(--bg); font-size: 14px; }
+        .status-badge { padding: 4px 8px; border-radius: 6px; font-size: 11px; font-weight: 700; text-transform: uppercase; }
+        .status-pending { background: #FEF3C7; color: #D97706; }
 
-/* DASHBOARD STATS */
-.stats { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-.stat-box { background: var(--surface); padding: 20px; border-radius: 12px; border: 1px solid var(--border); }
-.stat-val { font-size: 28px; font-weight: 700; color: var(--navy); }
-</style>
+        /* FORMS */
+        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
+        .field { display: flex; flex-direction: column; gap: 5px; margin-bottom: 15px; }
+        .field label { font-size: 12px; color: var(--muted); font-weight: 600; }
+        .field input, .field select { padding: 10px; border-radius: 8px; border: 1px solid var(--border); background: #FAFAFA; width: 100%; }
+        .room-row { background: #F9FAFB; border: 1px solid var(--border); padding: 20px; border-radius: 12px; margin-bottom: 15px; }
+
+        .page { display: none; }
+        .page.active { display: block; }
+    </style>
 </head>
 <body>
 
@@ -50,168 +55,190 @@ body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--t
     <div class="sidebar-logo">Paint<span>Scope</span> Pro</div>
     <div class="nav-links">
         <div class="nav-item active" onclick="showPage('dashboard')">Dashboard</div>
-        <div class="nav-item" onclick="showPage('settings')">System Settings</div>
+        <div class="nav-item" onclick="showPage('quotes')">Manage Quotes</div>
+        <div class="nav-item" onclick="showPage('settings')">Pricing Settings</div>
     </div>
 </div>
 
 <div class="main">
     <div id="page-dashboard" class="page active">
-        <div class="topbar">
-            <h2>Business Overview</h2>
-            <button class="btn-primary" onclick="showPage('create')">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-                Create Quote
-            </button>
-        </div>
+        <div class="topbar"><h2>Overview</h2><button class="btn-primary" onclick="showPage('create')">Create New Quote</button></div>
         <div class="content">
-            <div class="stats">
-                <div class="stat-box"><p>Total Quotes</p><div id="stat-count" class="stat-val">0</div></div>
-                <div class="stat-box"><p>Est. Revenue</p><div id="stat-rev" class="stat-val">$0</div></div>
+            <div class="grid-3" style="margin-bottom: 30px;">
+                <div class="card"><p style="color:var(--muted)">Total Revenue</p><h2 id="dash-rev">$0</h2></div>
+                <div class="card"><p style="color:var(--muted)">Active Quotes</p><h2 id="dash-count">0</h2></div>
+                <div class="card"><p style="color:var(--muted)">Avg. Job Size</p><h2 id="dash-avg">$0</h2></div>
+            </div>
+            <div class="card">
+                <h3>Recent Activity</h3>
+                <table id="recent-table">
+                    <thead><tr><th>Client</th><th>Date</th><th>Amount</th><th>Status</th></tr></thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div id="page-quotes" class="page">
+        <div class="topbar"><h2>All Quotes</h2></div>
+        <div class="content">
+            <div class="card">
+                <table id="full-quote-table">
+                    <thead><tr><th>Client</th><th>Date</th><th>Type</th><th>Total</th><th>Action</th></tr></thead>
+                    <tbody></tbody>
+                </table>
             </div>
         </div>
     </div>
 
     <div id="page-settings" class="page">
-        <div class="topbar"><h2>Pricing Config</h2><button class="btn-primary" onclick="saveSettings()">Save Rates</button></div>
+        <div class="topbar"><h2>Global Settings</h2><button class="btn-primary" onclick="saveSettings()">Update Prices</button></div>
         <div class="content">
             <div class="card">
-                <h3>Interior Rates ($)</h3>
-                <div class="grid-config">
-                    <div class="field"><label>Walls /m²</label><input type="number" id="rate-int-wall" step="0.1"></div>
-                    <div class="field"><label>Ceiling /m²</label><input type="number" id="rate-int-ceil" step="0.1"></div>
-                    <div class="field"><label>Doors (Each)</label><input type="number" id="rate-int-door"></div>
+                <div class="grid-3">
+                    <div class="field"><label>Int. Wall ($/m²)</label><input type="number" id="s-int-wall"></div>
+                    <div class="field"><label>Int. Ceil ($/m²)</label><input type="number" id="s-int-ceil"></div>
+                    <div class="field"><label>Int. Door (ea)</label><input type="number" id="s-int-door"></div>
                 </div>
-                <h3 style="margin-top:25px">Exterior Rates ($)</h3>
-                <div class="grid-config">
-                    <div class="field"><label>Walls /m²</label><input type="number" id="rate-ext-wall" step="0.1"></div>
-                    <div class="field"><label>Ceiling /m²</label><input type="number" id="rate-ext-ceil" step="0.1"></div>
-                    <div class="field"><label>Doors (Each)</label><input type="number" id="rate-ext-door"></div>
+                <div class="grid-3">
+                    <div class="field"><label>Ext. Wall ($/m²)</label><input type="number" id="s-ext-wall"></div>
+                    <div class="field"><label>Ext. Ceil ($/m²)</label><input type="number" id="s-ext-ceil"></div>
+                    <div class="field"><label>Ext. Door (ea)</label><input type="number" id="s-ext-door"></div>
                 </div>
             </div>
         </div>
     </div>
 
     <div id="page-create" class="page">
-        <div class="topbar"><h2>New Job Estimate</h2><button class="btn-primary" onclick="generateQuote()">Finalize Quote</button></div>
+        <div class="topbar"><h2>New Job</h2><button class="btn-primary" onclick="saveNewQuote()">Save & Finalize</button></div>
         <div class="content">
             <div class="card">
-                <div class="grid-config">
-                    <div class="field"><label>Client Name</label><input type="text" id="client-name" placeholder="John Doe"></div>
-                    <div class="field"><label>Job Type</label>
-                        <select id="job-type">
-                            <option value="Interior">Interior Only</option>
-                            <option value="Exterior">Exterior Only</option>
-                            <option value="Both">Interior & Exterior</option>
-                        </select>
+                <div class="grid-3">
+                    <div class="field"><label>Customer Name</label><input type="text" id="cust-name"></div>
+                    <div class="field"><label>Surface Type</label>
+                        <select id="cust-type"><option value="Interior">Interior</option><option value="Exterior">Exterior</option></select>
                     </div>
                 </div>
             </div>
-            <div id="room-container"></div>
-            <button class="btn-primary" style="background:var(--navy)" onclick="addRoomUI()">+ Add Custom Room</button>
+            <div id="room-list"></div>
+            <button class="btn-outline" onclick="addRoomRow()">+ Add Manual Room</button>
         </div>
     </div>
 </div>
 
 <script>
-// --- CORE DATA ---
-let settings = JSON.parse(localStorage.getItem('ps_settings')) || {
-    intWall: 15.00, intCeil: 12.00, intDoor: 80.00,
-    extWall: 22.00, extCeil: 18.00, extDoor: 120.00
-};
-let quoteHistory = JSON.parse(localStorage.getItem('ps_history')) || [];
-
-// --- NAVIGATION ---
-function showPage(pageId) {
-    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-    document.getElementById('page-' + pageId).classList.add('active');
-    if(pageId === 'create') startNewQuote();
-    if(pageId === 'settings') loadSettingsUI();
-    updateDashboard();
-}
-
-// --- SETTINGS LOGIC ---
-function loadSettingsUI() {
-    document.getElementById('rate-int-wall').value = settings.intWall;
-    document.getElementById('rate-int-ceil').value = settings.intCeil;
-    document.getElementById('rate-int-door').value = settings.intDoor;
-    document.getElementById('rate-ext-wall').value = settings.extWall;
-    document.getElementById('rate-ext-ceil').value = settings.extCeil;
-    document.getElementById('rate-ext-door').value = settings.extDoor;
-}
-
-function saveSettings() {
-    settings = {
-        intWall: parseFloat(document.getElementById('rate-int-wall').value),
-        intCeil: parseFloat(document.getElementById('rate-int-ceil').value),
-        intDoor: parseFloat(document.getElementById('rate-int-door').value),
-        extWall: parseFloat(document.getElementById('rate-ext-wall').value),
-        extCeil: parseFloat(document.getElementById('rate-ext-ceil').value),
-        extDoor: parseFloat(document.getElementById('rate-ext-door').value)
+    // DATA PERSISTENCE
+    let quotes = JSON.parse(localStorage.getItem('paint_quotes')) || [];
+    let settings = JSON.parse(localStorage.getItem('paint_settings')) || {
+        intW: 15, intC: 12, intD: 80, extW: 22, extC: 18, extD: 120
     };
-    localStorage.setItem('ps_settings', JSON.stringify(settings));
-    alert("System Rates Updated!");
-}
 
-// --- QUOTE LOGIC ---
-function startNewQuote() {
-    const container = document.getElementById('room-container');
-    container.innerHTML = ""; 
-    // Pre-populated rooms
-    const mainRooms = ["Kitchen", "Living Room", "Master Bedroom", "Bedroom 2", "Hallway"];
-    mainRooms.forEach(name => addRoomUI(name));
-}
+    function showPage(id) {
+        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+        document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+        document.getElementById('page-'+id).classList.add('active');
+        if(id === 'create') initQuoteForm();
+        if(id === 'settings') initSettingsForm();
+        if(id === 'dashboard' || id === 'quotes') renderTables();
+    }
 
-function addRoomUI(name = "New Room") {
-    const id = Date.now() + Math.random();
-    const html = `
-        <div class="room-row" id="room-${id}">
+    function initSettingsForm() {
+        document.getElementById('s-int-wall').value = settings.intW;
+        document.getElementById('s-int-ceil').value = settings.intC;
+        document.getElementById('s-int-door').value = settings.intD;
+        document.getElementById('s-ext-wall').value = settings.extW;
+        document.getElementById('s-ext-ceil').value = settings.extC;
+        document.getElementById('s-ext-door').value = settings.extD;
+    }
+
+    function saveSettings() {
+        settings = {
+            intW: parseFloat(document.getElementById('s-int-wall').value),
+            intC: parseFloat(document.getElementById('s-int-ceil').value),
+            intD: parseFloat(document.getElementById('s-int-door').value),
+            extW: parseFloat(document.getElementById('s-ext-wall').value),
+            extC: parseFloat(document.getElementById('s-ext-ceil').value),
+            extD: parseFloat(document.getElementById('s-ext-door').value)
+        };
+        localStorage.setItem('paint_settings', JSON.stringify(settings));
+        alert("Prices updated successfully!");
+    }
+
+    function initQuoteForm() {
+        document.getElementById('room-list').innerHTML = "";
+        ["Kitchen", "Living Room", "Master Bedroom", "Bedroom 2", "Hallway"].forEach(r => addRoomRow(r));
+    }
+
+    function addRoomRow(name = "New Area") {
+        const div = document.createElement('div');
+        div.className = 'room-row';
+        div.innerHTML = `
             <h4 style="margin-bottom:10px">${name}</h4>
-            <div class="grid-config">
-                <div class="field"><label>Walls (m²)</label><input type="number" class="r-wall" value="0"></div>
-                <div class="field"><label>Ceiling (m²)</label><input type="number" class="r-ceil" value="0"></div>
-                <div class="field"><label>Doors</label><input type="number" class="r-door" value="0"></div>
-                <div class="field"><label>Difficulty</label>
-                    <select class="r-diff">
-                        <option value="1">Easy (x1.0)</option>
-                        <option value="1.3">Medium (x1.3)</option>
-                        <option value="1.5">Hard (x1.5)</option>
-                    </select>
+            <div class="grid-3">
+                <div class="field"><label>Walls (m²)</label><input type="number" class="room-w" value="0"></div>
+                <div class="field"><label>Ceil (m²)</label><input type="number" class="room-c" value="0"></div>
+                <div class="field"><label>Diff.</label>
+                    <select class="room-d"><option value="1">x1.0</option><option value="1.3">x1.3</option><option value="1.5">x1.5</option></select>
                 </div>
-            </div>
-        </div>`;
-    document.getElementById('room-container').insertAdjacentHTML('beforeend', html);
-}
+            </div>`;
+        document.getElementById('room-list').appendChild(div);
+    }
 
-function generateQuote() {
-    const type = document.getElementById('job-type').value;
-    const wallRate = type === "Interior" ? settings.intWall : settings.extWall;
-    const ceilRate = type === "Interior" ? settings.intCeil : settings.extCeil;
-    const doorRate = type === "Interior" ? settings.intDoor : settings.extDoor;
-
-    let total = 0;
-    document.querySelectorAll('.room-row').forEach(row => {
-        const w = parseFloat(row.querySelector('.r-wall').value) || 0;
-        const c = parseFloat(row.querySelector('.r-ceil').value) || 0;
-        const d = parseFloat(row.querySelector('.r-door').value) || 0;
-        const diff = parseFloat(row.querySelector('.r-diff').value);
+    function saveNewQuote() {
+        const type = document.getElementById('cust-type').value;
+        const wRate = type === "Interior" ? settings.intW : settings.extW;
+        const cRate = type === "Interior" ? settings.intC : settings.extC;
         
-        total += ((w * wallRate) + (c * ceilRate) + (d * doorRate)) * diff;
-    });
+        let subtotal = 0;
+        document.querySelectorAll('.room-row').forEach(row => {
+            const w = parseFloat(row.querySelector('.room-w').value) || 0;
+            const c = parseFloat(row.querySelector('.room-c').value) || 0;
+            const d = parseFloat(row.querySelector('.room-d').value);
+            subtotal += ((w * wRate) + (c * cRate)) * d;
+        });
 
-    quoteHistory.push({ date: new Date().toLocaleDateString(), client: document.getElementById('client-name').value, amount: total });
-    localStorage.setItem('ps_history', JSON.stringify(quoteHistory));
-    alert("Quote Generated: $" + total.toFixed(2));
-    showPage('dashboard');
-}
+        const newQuote = {
+            id: Date.now(),
+            client: document.getElementById('cust-name').value || "Unnamed Client",
+            date: new Date().toLocaleDateString(),
+            type: type,
+            total: subtotal
+        };
 
-function updateDashboard() {
-    const totalRev = quoteHistory.reduce((sum, q) => sum + q.amount, 0);
-    document.getElementById('stat-count').innerText = quoteHistory.length;
-    document.getElementById('stat-rev').innerText = "$" + totalRev.toLocaleString();
-}
+        quotes.unshift(newQuote);
+        localStorage.setItem('paint_quotes', JSON.stringify(quotes));
+        showPage('dashboard');
+    }
 
-// Initialize
-updateDashboard();
+    function renderTables() {
+        const recentBody = document.querySelector('#recent-table tbody');
+        const fullBody = document.querySelector('#full-quote-table tbody');
+        recentBody.innerHTML = ""; fullBody.innerHTML = "";
+
+        let totalRev = 0;
+        quotes.forEach((q, index) => {
+            totalRev += q.total;
+            const row = `<tr><td>${q.client}</td><td>${q.date}</td><td>$${q.total.toFixed(2)}</td><td><span class="status-badge status-pending">Pending</span></td></tr>`;
+            if(index < 5) recentBody.innerHTML += row;
+            
+            fullBody.innerHTML += `<tr><td>${q.client}</td><td>${q.date}</td><td>${q.type}</td><td>$${q.total.toFixed(2)}</td>
+                <td><button onclick="deleteQuote(${q.id})" style="color:red; background:none; border:none; cursor:pointer">Delete</button></td></tr>`;
+        });
+
+        document.getElementById('dash-rev').innerText = "$" + totalRev.toLocaleString();
+        document.getElementById('dash-count').innerText = quotes.length;
+        document.getElementById('dash-avg').innerText = quotes.length ? "$" + (totalRev/quotes.length).toFixed(0) : "$0";
+    }
+
+    function deleteQuote(id) {
+        if(confirm("Delete this quote?")) {
+            quotes = quotes.filter(q => q.id !== id);
+            localStorage.setItem('paint_quotes', JSON.stringify(quotes));
+            renderTables();
+        }
+    }
+
+    renderTables();
 </script>
 </body>
 </html>
